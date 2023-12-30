@@ -6,52 +6,34 @@
 /*   By: vketteni <vketteni@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 12:31:37 by vketteni          #+#    #+#             */
-/*   Updated: 2023/12/29 19:01:37 by vketteni         ###   ########.fr       */
+/*   Updated: 2023/12/30 17:58:00 by vketteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-void	process_line(const char *line)
+char	*get_next_line(int fd)
 {
-    while (*line)
-        write(1, line++, 1);
-}
-
-char    *get_next_line(int fd)
-{
-	size_t	bytes_read;
-	char	buffer[BUFF_SIZE];
-	char	*line;
-	size_t	line_length;
-    size_t  i;
+	static char	buffer[BUFF_SIZE];
+	static int	buff_pos = 0;
+	ssize_t		bytes_read;
+	char		*line;
 
 	line = NULL;
-	line_length = 0;
-
-    bytes_read = read(fd, buffer, BUFF_SIZE);
-	while ((bytes_read ) > 0)
+	while (1)
 	{
-        i = 0;
-		while (i < bytes_read)
-		{
-			line = ft_realloc(line, line_length + 1);
-            if (line == 0)
-                return (0);
-			line[line_length++] = buffer[i];
-			if (buffer[i] == '\n')
-			{
-				line[line_length] = '\0';
-				process_line(line);
-				free(line);
-				line = NULL;
-				line_length = 0;
-			}
-            i++;
-		}
-        bytes_read = read(fd, buffer, BUFF_SIZE);
+		if (buff_pos == 0)
+			bytes_read = ft_read_to_buffer(fd, buffer);
+		if (bytes_read <= 0)
+			return (NULL);
+		line = ft_process_buffer_into_line(line, buffer, buff_pos);
+		if (line == 0)
+			return (NULL);
+		while (buffer[buff_pos] && buffer[buff_pos] != '\n')
+			buff_pos++;
+		if (buffer[buff_pos] == '\n')
+			return (line);
+		if (buffer[buff_pos] == '\0')
+			buff_pos = 0;
 	}
-	if (bytes_read <= 0)
-        return (0);
 }
-
