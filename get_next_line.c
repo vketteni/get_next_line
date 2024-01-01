@@ -6,7 +6,7 @@
 /*   By: vketteni <vketteni@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 12:31:37 by vketteni          #+#    #+#             */
-/*   Updated: 2023/12/31 16:57:01 by vketteni         ###   ########.fr       */
+/*   Updated: 2024/01/01 18:39:55 by vketteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ char	*get_next_line(int fd)
 			return (NULL);
 		while (buffer[buff_pos] && buffer[buff_pos] != '\n')
 			buff_pos++;
-		if (buffer[buff_pos] == '\n' && buff_pos++)
+		if (buffer[buff_pos] == '\n' && (buff_pos++ >= 0))
 			return (line);
 		if (buffer[buff_pos] == '\0')
 			buff_pos = 0;

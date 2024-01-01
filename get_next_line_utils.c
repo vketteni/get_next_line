@@ -6,7 +6,7 @@
 /*   By: vketteni <vketteni@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 14:05:52 by vketteni          #+#    #+#             */
-/*   Updated: 2023/12/31 16:57:26 by vketteni         ###   ########.fr       */
+/*   Updated: 2024/01/01 18:26:48 by vketteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,23 +50,23 @@ char	*ft_alloc_empty_line(void)
 char	*ft_process_buffer_into_line(char *line, char *buffer, int buff_pos)
 {
 	int	line_length;
-	int	line_end;
+	int	buff_end;
 
-	line_end = buff_pos;
+	buff_end = buff_pos;
 	line_length = 0;
 	while (line && line[line_length])
 		line_length++;
-	while (buffer[line_end] && (buffer[line_end] != '\n'))
-		line_end++;
-	// if (line_length == 0 && buffer[buff_pos] == '\n')
-	// 	return (ft_alloc_empty_line());
-	line = ft_realloc(line, line_length + (line_end - buff_pos) + 1);
+	while (buffer[buff_end] && (buffer[buff_end] != '\n'))
+		buff_end++;
+	if (buffer[buff_end] == '\n')
+		buff_end++;
+	line = ft_realloc(line, line_length + (buff_end - buff_pos) + 1);
 	if (line == NULL)
 	{
 		free(line);
 		return (NULL);
 	}
-	while (buff_pos < line_end)
+	while (buff_pos < buff_end)
 		line[line_length++] = buffer[buff_pos++];
 	line[line_length] = '\0';
 	return (line);

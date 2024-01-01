@@ -10,11 +10,11 @@ int main() {
         return 1; // Return non-zero value to indicate error
     }
 
-    char *line = get_next_line(fd);
+    char *line = get_next_line(0);
     while (line != NULL) {
-        printf("%s\n", line);
+        printf("%s", line);
         free(line);
-        line = get_next_line(fd);
+        line = get_next_line(0);
     }
 
     // Close the file descriptor
