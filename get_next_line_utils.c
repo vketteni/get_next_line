@@ -6,7 +6,7 @@
 /*   By: vketteni <vketteni@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 14:05:52 by vketteni          #+#    #+#             */
-/*   Updated: 2024/01/01 18:57:57 by vketteni         ###   ########.fr       */
+/*   Updated: 2024/01/01 21:00:45 by vketteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,18 +33,6 @@ char	*ft_realloc(char *old_memory, size_t new_size)
 	while (i < new_size)
 		new_memory[i++] = '\0';
 	return (new_memory);
-}
-
-char	*ft_alloc_empty_line(void)
-{
-	char	*empty_line;
-
-	empty_line = (char *)malloc(sizeof(char) * 2);
-	if (empty_line == NULL)
-		return (NULL);
-	empty_line[0] = '\n';	
-	empty_line[1] = '\0';
-	return (empty_line);	
 }
 
 char	*ft_process_buffer_into_line(char *line, char *buffer, int buff_pos)
