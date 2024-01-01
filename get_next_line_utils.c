@@ -6,7 +6,7 @@
 /*   By: vketteni <vketteni@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 14:05:52 by vketteni          #+#    #+#             */
-/*   Updated: 2024/01/01 18:26:48 by vketteni         ###   ########.fr       */
+/*   Updated: 2024/01/01 18:57:57 by vketteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ char	*ft_process_buffer_into_line(char *line, char *buffer, int buff_pos)
 	line_length = 0;
 	while (line && line[line_length])
 		line_length++;
-	while (buffer[buff_end] && (buffer[buff_end] != '\n'))
+	while (buff_end < BUFFER_SIZE && (buffer[buff_end] != '\n'))
 		buff_end++;
 	if (buffer[buff_end] == '\n')
 		buff_end++;
@@ -78,14 +78,13 @@ int	ft_read_to_buffer(int fd, char *buffer, int buff_pos, char *line)
 
 	if (buff_pos == 0)
 	{
-		bytes_read = read(fd, buffer, BUFFER_SIZE - 1);
+		bytes_read = read(fd, buffer, BUFFER_SIZE);
 		if (bytes_read <= 0)
 		{
 			if (bytes_read == 0 && line)
 				return (END_OF_FUNCTION);
 			return (ERROR);
 		}
-		buffer[bytes_read] = '\0';
 	}
 	return (CONTINUE);
 }
