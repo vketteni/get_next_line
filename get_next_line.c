@@ -6,7 +6,7 @@
 /*   By: vketteni <vketteni@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 12:31:37 by vketteni          #+#    #+#             */
-/*   Updated: 2024/01/02 16:07:29 by vketteni         ###   ########.fr       */
+/*   Updated: 2024/01/03 18:43:52 by vketteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,7 @@ char	*get_next_line(int fd)
 				return (NULL);
 		}
 		line = ft_process_buffer_into_line(buffer, &buff_pos, line, bytes_read);
-		if (buff_pos > 0 && (buffer[buff_pos] == '\0'
-				|| buffer[buff_pos - 1] == '\n'))
+		if (buffer[buff_pos] == '\0' || buffer[buff_pos] == '\n')
 			return (line);
 	}
 }

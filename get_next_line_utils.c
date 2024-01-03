@@ -6,7 +6,7 @@
 /*   By: vketteni <vketteni@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 14:05:52 by vketteni          #+#    #+#             */
-/*   Updated: 2024/01/02 16:06:31 by vketteni         ###   ########.fr       */
+/*   Updated: 2024/01/03 21:57:14 by vketteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,31 @@ char	*ft_realloc(char *old_memory, size_t new_size)
 	return (new_memory);
 }
 
+int	ft_strlen(char *str)
+{
+        char    *start;
+
+        start = (char *)str;
+        while (*(str))
+                str++;
+        return (str - start);
+}
+
+int	ft_write_buffer_to_line(char *line, char *buffer, int buff_pos, int new_end)
+{
+	int start;
+	int	line_length;
+
+	start = buff_pos;
+	line_length = ft_strlen(line);
+	while (buff_pos < new_end)
+		line[line_length++] = buffer[buff_pos++];
+	if (buffer[buff_pos] != '\0')
+		line[line_length++] = buffer[buff_pos];
+	line[line_length] = '\0';
+	return (buff_pos - start);
+}
+
 char	*ft_process_buffer_into_line(char *buffer, int *buff_pos, char *line,
 		int bytes_read)
 {
@@ -43,38 +68,21 @@ char	*ft_process_buffer_into_line(char *buffer, int *buff_pos, char *line,
 
 	new_end = *buff_pos;
 	line_length = 0;
-	while (line && line[line_length])
-		line_length++;
+	if (line)
+		line_length = ft_strlen(line);
 	while (new_end < BUFFER_SIZE - 1 && new_end < bytes_read
 		&& buffer[new_end] != '\0' && (buffer[new_end] != '\n'))
 		new_end++;
-	if (buffer[new_end] != '\0')
-		new_end++;
-	line = ft_realloc(line, line_length + (new_end - *buff_pos) + 1);
+	if (buffer[new_end] == '\0')
+		line = ft_realloc(line, line_length + (new_end - *buff_pos) + 1);
+	else
+		line = ft_realloc(line, line_length + (new_end - *buff_pos) + 2);
 	if (line == NULL)
 	{
 		free(line);
 		return (NULL);
 	}
-	while (*buff_pos < new_end)
-		line[line_length++] = buffer[(*buff_pos)++];
-	line[line_length] = '\0';
+	*buff_pos += ft_write_buffer_to_line(buffer, line, *buff_pos, new_end);
 	return (line);
 }
 
-// int	ft_read_to_buffer(int fd, char *buffer, int buff_pos, char *line)
-// {
-// 	ssize_t	bytes_read;
-
-// 	if (buff_pos == 0)
-// 	{
-// 		bytes_read = read(fd, buffer, BUFFER_SIZE);
-// 		if (bytes_read <= 0)
-// 		{
-// 			if (bytes_read == 0 && line)
-// 				return (END_OF_FUNCTION);
-// 			return (ERROR);
-// 		}
-// 	}
-// 	return (CONTINUE);
-// }
