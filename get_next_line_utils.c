@@ -6,7 +6,7 @@
 /*   By: vketteni <vketteni@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 14:05:52 by vketteni          #+#    #+#             */
-/*   Updated: 2024/01/03 21:57:14 by vketteni         ###   ########.fr       */
+/*   Updated: 2024/01/05 17:39:02 by vketteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,17 +37,17 @@ char	*ft_realloc(char *old_memory, size_t new_size)
 
 int	ft_strlen(char *str)
 {
-        char    *start;
+	char	*start;
 
-        start = (char *)str;
-        while (*(str))
-                str++;
-        return (str - start);
+	start = (char *)str;
+	while (*(str))
+		str++;
+	return (str - start);
 }
 
-int	ft_write_buffer_to_line(char *line, char *buffer, int buff_pos, int new_end)
+int	ft_write_buffer_to_line(char *buffer, char *line, int buff_pos, int new_end)
 {
-	int start;
+	int	start;
 	int	line_length;
 
 	start = buff_pos;
@@ -70,7 +70,7 @@ char	*ft_process_buffer_into_line(char *buffer, int *buff_pos, char *line,
 	line_length = 0;
 	if (line)
 		line_length = ft_strlen(line);
-	while (new_end < BUFFER_SIZE - 1 && new_end < bytes_read
+	while (new_end < BUFFER_SIZE - 1 && new_end < bytes_read - 1
 		&& buffer[new_end] != '\0' && (buffer[new_end] != '\n'))
 		new_end++;
 	if (buffer[new_end] == '\0')
@@ -85,4 +85,3 @@ char	*ft_process_buffer_into_line(char *buffer, int *buff_pos, char *line,
 	*buff_pos += ft_write_buffer_to_line(buffer, line, *buff_pos, new_end);
 	return (line);
 }
-

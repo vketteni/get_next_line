@@ -6,7 +6,7 @@
 /*   By: vketteni <vketteni@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 12:32:36 by vketteni          #+#    #+#             */
-/*   Updated: 2024/01/02 16:04:59 by vketteni         ###   ########.fr       */
+/*   Updated: 2024/01/05 12:24:47 by vketteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define GET_NEXT_LINE_H
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 8
+#  define BUFFER_SIZE 42
 # endif
 
 # include <stdlib.h>

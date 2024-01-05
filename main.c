@@ -2,13 +2,17 @@
 #include <fcntl.h> // Include for open
 #include <stdio.h>
 
+#ifndef INPUT_FILE
+ #define INPUT_FILE "tests/43_nl.txt"
+#endif
+
 int	main(void)
 {
 	int		fd;
 	char	*line;
 
 	// Open the file in read-only mode
-	fd = open("example.txt", O_RDONLY);
+	fd = open(INPUT_FILE, O_RDONLY);
 	if (fd == -1)
 	{
 		perror("Error opening file");
@@ -17,7 +21,7 @@ int	main(void)
 	line = get_next_line(fd);
 	while (line != NULL)
 	{
-		printf("'%s'", line);
+		printf("%s", line);
 		free(line);
 		line = get_next_line(fd);
 	}
@@ -25,3 +29,5 @@ int	main(void)
 	close(fd);
 	return (0);
 }
+
+

@@ -1,0 +1,22 @@
+break get_next_line
+commands
+    display buffer
+    display bytes_read
+    display buff_pos
+    display line
+end
+break ft_process_buffer_into_line
+commands
+    display new_end
+    display buffer[new_end]
+end
+break ft_write_buffer_to_line
+commands
+    display line
+    display line_length
+end
+
+b main
+run
+tui enable
+fs cmd
