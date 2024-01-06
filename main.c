@@ -3,7 +3,7 @@
 #include <stdio.h>
 
 #ifndef INPUT_FILE
- #define INPUT_FILE "tests/43_nl.txt"
+ #define INPUT_FILE "tests/43_only_nl.txt"
 #endif
 
 int	main(void)

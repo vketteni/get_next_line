@@ -6,7 +6,7 @@
 /*   By: vketteni <vketteni@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 12:31:37 by vketteni          #+#    #+#             */
-/*   Updated: 2024/01/05 17:25:31 by vketteni         ###   ########.fr       */
+/*   Updated: 2024/01/06 01:43:59 by vketteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,10 @@ char	*get_next_line(int fd)
 		line = ft_process_buffer_into_line(buffer, &buff_pos, line, bytes_read);
 		if (buffer[buff_pos] == '\n')
 		{
-			buff_pos = ((buff_pos + 1) % BUFFER_SIZE);
+			buff_pos = ((buff_pos + 1) % bytes_read);
 			return (line);
 		}
-		if (buff_pos == BUFFER_SIZE - 1)
+		if (buff_pos == BUFFER_SIZE - 1  || buff_pos == bytes_read - 1)
 			buff_pos = 0;
 	}
 }

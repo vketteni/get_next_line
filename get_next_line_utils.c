@@ -6,7 +6,7 @@
 /*   By: vketteni <vketteni@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 14:05:52 by vketteni          #+#    #+#             */
-/*   Updated: 2024/01/05 17:39:02 by vketteni         ###   ########.fr       */
+/*   Updated: 2024/01/06 02:00:18 by vketteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ char	*ft_process_buffer_into_line(char *buffer, int *buff_pos, char *line,
 	if (line == NULL)
 	{
 		free(line);
+		free(buffer);
 		return (NULL);
 	}
 	*buff_pos += ft_write_buffer_to_line(buffer, line, *buff_pos, new_end);
